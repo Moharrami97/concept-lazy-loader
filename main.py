@@ -26,7 +26,7 @@ class MySqlHandler:
 
 class MongoHandler:
     def __init__(self):
-        sleep(1)
+        sleep(100)
 
     def get(self):
         return "Hello from Mongo"
@@ -41,6 +41,9 @@ class NotificationCenterHandler:
 
 
 if __name__ == "__main__":
-    mysql = MySqlHandler()
-    mongo = MongoHandler()
-    notification = NotificationCenterHandler()
+    mysql = LazyLoader(MySqlHandler)
+    mongo = LazyLoader(MongoHandler)
+    notification = LazyLoader(NotificationCenterHandler)
+
+    print(mysql.get())
+    print(notification.get())
